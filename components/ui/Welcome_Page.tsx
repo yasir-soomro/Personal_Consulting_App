@@ -270,11 +270,11 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
   const currentQuestion = questions[step - 1];
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-slate-50 text-slate-900 font-sans selection:bg-indigo-500/30">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-auto bg-slate-50 text-slate-900 font-sans selection:bg-indigo-500/30">
       
       <Background3D />
 
-      <div className="relative z-10 w-full max-w-3xl px-6">
+      <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 py-8 sm:py-0 my-auto">
         <AnimatePresence mode="wait">
           
           {/* ================= STEP 0: INTRO ================= */}
@@ -301,7 +301,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
               </UltraTilt>
 
               <motion.h1 
-                className="text-5xl sm:text-7xl font-black/30 tracking-tighter mb-6 text-slate-800 drop-shadow-sm "
+                className="text-3xl sm:text-5xl lg:text-7xl font-black/30 tracking-tighter mb-4 sm:mb-6 text-slate-800 drop-shadow-sm leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -310,19 +310,19 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
               </motion.h1>
               
               <motion.p 
-                className="text-xl sm:text-2xl text-slate-500 max-w-lg mx-auto mb-12 leading-relaxed font-medium"
+                className="text-base sm:text-lg lg:text-2xl text-slate-500 max-w-lg mx-auto mb-8 sm:mb-12 leading-relaxed font-medium"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                Your personalized path to mastering modern tech. <br/> Let's build your career roadmap.
+                Your personalized path to mastering modern tech. Let's build your career roadmap.
               </motion.p>
 
               <motion.button
                 onClick={handleStart}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-4 px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-red-600 transition-all duration-500 shadow-xl shadow-slate-900/20"
+                className="group relative inline-flex items-center gap-2 sm:gap-4 px-6 sm:px-10 py-3 sm:py-5 bg-slate-900 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg hover:bg-red-600 transition-all duration-500 shadow-xl shadow-slate-900/20"
               >
                 Start Journey
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -341,7 +341,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
               className="w-full"
             >
               <UltraTilt>
-                  <div className="bg-white/70 backdrop-blur-2xl border border-white/60 rounded-[3rem] p-8 sm:p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] relative overflow-hidden transform-gpu"
+                  <div className="bg-white/70 backdrop-blur-2xl border border-white/60 rounded-2xl sm:rounded-[3rem] p-6 sm:p-8 lg:p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] relative overflow-hidden transform-gpu w-full"
                        style={{ transformStyle: 'preserve-3d' }}
                   >
                     
@@ -359,22 +359,22 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
                     </div>
 
                     {/* Header Section */}
-                    <div className="mb-10 relative" style={{ transform: "translateZ(40px)" }}>
-                        <div className="flex items-center justify-between mb-4">
-                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    <div className="mb-6 sm:mb-10 relative" style={{ transform: "translateZ(40px)" }}>
+                        <div className="flex items-center justify-between mb-2 sm:mb-4 gap-2">
+                            <span className="inline-flex items-center gap-2 px-2 sm:px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-slate-500">
                                 <Command size={10} /> Step 0{step}
                             </span>
-                            <currentQuestion.icon className="text-indigo-500/50" size={32} />
+                            <currentQuestion.icon className="text-indigo-500/50 flex-shrink-0" size={24} />
                         </div>
                         
-                        <h2 className="text-2xl sm:text-3xl font-black text-red-600 mb-2 tracking-tight min-h-[1.2em]">
+                        <h2 className="text-lg sm:text-2xl lg:text-3xl font-black text-red-600 mb-1 sm:mb-2 tracking-tight min-h-[1.2em] line-clamp-3">
                            <TypewriterHeading text={currentQuestion.title} />
                         </h2>
-                        <p className="text-lg text-slate-500 font-medium">{currentQuestion.subtitle}</p>
+                        <p className="text-sm sm:text-base lg:text-lg text-slate-500 font-medium">{currentQuestion.subtitle}</p>
                     </div>
 
                     {/* Options Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative" style={{ transform: "translateZ(60px)" }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 relative" style={{ transform: "translateZ(60px)" }}>
                       {currentQuestion.options.map((option, idx) => (
                         <motion.button
                           key={idx}
@@ -382,21 +382,22 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: idx * 0.1 }}
                           onClick={() => handleAnswer(option.label)}
-                          className="group relative p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-300 text-left overflow-hidden"
+                          className="group relative p-3 sm:p-6 rounded-lg sm:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-300 text-left overflow-hidden min-h-[60px] sm:min-h-auto"
                           whileHover={{ scale: 1.02, z: 20 }}
                           whileTap={{ scale: 0.98 }}
                         >
                           {/* Gradient Hover Border */}
-                          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-transparent bg-gradient-to-r ${option.color} [mask:linear-gradient(#fff_0_0)_padding-box,linear-gradient(#fff_0_0)] [-webkit-mask-composite:destination-out] mask-composite:exclude rounded-2xl`} />
+                          <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-2 border-transparent bg-gradient-to-r ${option.color} [mask:linear-gradient(#fff_0_0)_padding-box,linear-gradient(#fff_0_0)] [-webkit-mask-composite:destination-out] mask-composite:exclude rounded-lg sm:rounded-2xl`} />
 
-                          <div className="flex items-center gap-4 relative z-10">
-                            <div className="text-2xl text-slate-400 group-hover:text-indigo-600 transition-all duration-300 scale-100 group-hover:scale-125">
-                              <option.icon size={28} />
+                          <div className="flex items-center gap-2 sm:gap-4 relative z-10">
+                            <div className="text-lg sm:text-2xl text-slate-400 group-hover:text-indigo-600 transition-all duration-300 scale-100 group-hover:scale-125 flex-shrink-0">
+                              <option.icon size={20} className="sm:hidden" />
+                              <option.icon size={28} className="hidden sm:block" />
                             </div>
-                            <span className="font-bold text-slate-700 group-hover:text-slate-900 text-lg transition-colors">
+                            <span className="font-bold text-slate-700 group-hover:text-slate-900 text-xs sm:text-lg transition-colors line-clamp-2">
                                 {option.label}
                             </span>
-                            <ChevronRight size={20} className="ml-auto text-slate-300 group-hover:text-indigo-500 transform group-hover:translate-x-1 transition-all" />
+                            <ChevronRight size={20} className="ml-auto text-slate-300 group-hover:text-indigo-500 transform group-hover:translate-x-1 transition-all flex-shrink-0 hidden sm:block" />
                           </div>
                         </motion.button>
                       ))}
@@ -417,14 +418,14 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
               className="text-center w-full"
             >
                <UltraTilt>
-                   <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-[3rem] p-16 shadow-2xl inline-block" style={{ transformStyle: 'preserve-3d' }}>
+                   <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl sm:rounded-[3rem] p-8 sm:p-16 shadow-2xl inline-block" style={{ transformStyle: 'preserve-3d' }}>
                        <div style={{ transform: "translateZ(50px)" }}>
                            <ThreeDCubeLoader />
                            
                            <motion.h2 
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="text-3xl sm:text-4xl font-black text-slate-900 mb-4"
+                            className="text-xl sm:text-3xl lg:text-4xl font-black text-slate-900 mb-3 sm:mb-4"
                            >
                             Generating Plan...
                            </motion.h2>
