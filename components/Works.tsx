@@ -1,170 +1,208 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { MessageCircle, Map, Rocket, ArrowRight, Sparkles, CheckCircle2, Loader2 } from "lucide-react";
+import React from "react";
+import { motion, cubicBezier, Variants } from "framer-motion";
+import { TrendingUp, ArrowRight, BarChart3 } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { caseStudies } from "@/app/(route)/cases/data";
 
-const steps = [
-  {
-    title: "Share Your Current Challenge",
-    description:
-      "Tell us where you're stuck—whether it's choosing career paths, understanding Agentic AI, or conquering cloud architecture. We listen and analyze without judgment.",
-    icon: MessageCircle,
-    highlights: ["No gatekeeping", "Real-time analysis", "Your pace, your goals"],
-    color: "from-violet-500 to-fuchsia-500",
-    accentColor: "violet",
-  },
-  {
-    title: "Receive Your Custom Roadmap",
-    description:
-      "We synthesize your background and ambitions into ONE focused learning path. No information overload—just a clear, actionable roadmap designed specifically for you.",
-    icon: Map,
-    highlights: ["Personalized path", "Step-by-step clarity", "Zero fluff advice"],
-    color: "from-blue-500 to-cyan-500",
-    accentColor: "blue",
-  },
-  {
-    title: "Begin With Total Confidence",
-    description:
-      "Walk away with crystal-clear next steps and genuine confidence. You'll know exactly what to learn, in what order, and why it matters for your career longevity.",
-    icon: Rocket,
-    highlights: ["Actionable items", "Resource toolkit", "Ongoing support"],
-    color: "from-emerald-500 to-teal-500",
-    accentColor: "emerald",
-  },
-];
+/* ================= Animations ================= */
+const customEase = cubicBezier(0.16, 1, 0.3, 1);
 
-// Mock AI image generator
-const generateAIImageMock = async (prompt: string) => {
-  return "https://via.placeholder.com/400x300.png?text=AI+Illustration"; // placeholder
+const heroVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: customEase },
+  },
 };
 
-const AIIllustration = ({ prompt, colorClass }: { prompt: string; colorClass: string }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+const staggerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
 
-  useEffect(() => {
-    setLoading(true);
-    generateAIImageMock(prompt)
-      .then((url) => setImageUrl(url))
-      .finally(() => setLoading(false));
-  }, [prompt]);
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: customEase },
+  },
+};
 
+/* ================= Page ================= */
+const Works = () => {
   return (
-    <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden bg-gray-50 flex items-center justify-center">
-      <AnimatePresence mode="wait">
-        {loading ? (
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+      {/* ================= Hero ================= */}
+      <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden bg-slate-50 border-b dark:bg-slate-950 dark:border-slate-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 items-center">
+            <motion.div
+              variants={heroVariants}
+              initial="hidden"
+              animate="show"
+              className="max-w-3xl"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest mb-8 dark:bg-white dark:text-slate-900">
+                <BarChart3 size={14} className="text-emerald-400" />
+                Proven Results
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[0.9] mb-8">
+                Strategic <br />
+                <span className="italic text-slate-300 dark:text-slate-500">
+                  Impact.
+                </span>
+              </h1>
+
+              <p className="text-lg sm:text-xl lg:text-2xl text-slate-500 leading-relaxed dark:text-slate-300">
+                Translating complex architectural ideas into measurable business
+                outcomes across real-world systems.
+              </p>
+            </motion.div>
+
+            {/* Hero Image */}
+            <motion.div variants={heroVariants} initial="hidden" animate="show" className="w-full">
+              <div className="relative w-full aspect-video rounded-2xl sm:rounded-[2.5rem] overflow-hidden border shadow-2xl bg-slate-100 dark:bg-slate-900">
+                <Image
+                  src="/images/lina.jpg"
+                  alt="Case study analysis"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/70 to-transparent" />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= Case Studies ================= */}
+      <section className="py-16 sm:py-24 lg:py-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex flex-col items-center gap-2"
+            variants={staggerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-120px" }}
+            className="space-y-16 sm:space-y-24 lg:space-y-32"
           >
-            <Loader2 className={`w-10 h-10 animate-spin text-${colorClass}-500`} />
-            <span className="text-xs text-gray-400 uppercase tracking-widest">
-              Rendering AI Vision...
-            </span>
+            {caseStudies.map((project, i) => (
+              <motion.div
+                key={project.slug}
+                variants={itemVariants}
+                className={`flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-16 items-start lg:items-center ${
+                  i % 2 ? "lg:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Image */}
+                <div className="flex-1 w-full relative">
+                  <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl lg:rounded-[2.5rem] overflow-hidden shadow-xl sm:shadow-2xl group bg-slate-100 dark:bg-slate-900">
+                    <Image
+                      src={project.image || "/images/cons.png"}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 will-change-transform group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <span className="absolute bottom-6 left-6 px-4 py-2 rounded-xl bg-white/10 text-white text-xs font-black uppercase tracking-widest">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Floating Card */}
+                  <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 block sm:block bg-white dark:bg-slate-900 p-3 sm:p-6 rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl border text-xs sm:text-base">
+                    <div
+                      className={`h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center text-white mb-3 sm:mb-4`}
+                    >
+                      <TrendingUp size={18} className="sm:w-[22px] sm:h-[22px]" />
+                    </div>
+                    <p className="text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-400">
+                      Key Outcome
+                    </p>
+                    <p className="text-base sm:text-lg font-bold">{project.impact}</p>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 space-y-6 sm:space-y-8">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.3em] text-blue-600 mb-3">
+                      Case Study 0{i + 1}
+                    </p>
+                    <h3 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs uppercase tracking-widest text-slate-400">
+                      Client: {project.client}
+                    </p>
+                  </div>
+
+                  <p className="text-base sm:text-lg italic text-slate-500 dark:text-slate-300">
+                    &ldquo;{project.description}&rdquo;
+                  </p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                    {project.metrics.map((m) => (
+                      <div
+                        key={m.label}
+                        className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-slate-900 border"
+                      >
+                        <p className="text-lg sm:text-xl font-black">{m.value}</p>
+                        <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-slate-400">
+                          {m.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={`/cases/${project.slug}`}
+                    className="inline-flex items-center gap-2 sm:gap-3 font-black uppercase tracking-widest text-xs sm:text-sm border-b-2 pb-2 transition-all hover:gap-4 sm:hover:gap-5"
+                  >
+                    Deep Dive Analysis
+                    <ArrowRight size={18} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
-        ) : (
-          <motion.img
-            key="image"
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            src={imageUrl!}
-            alt="Step Illustration"
-            className="w-full h-full object-contain p-4"
-          />
-        )}
-      </AnimatePresence>
-      <div className={`absolute inset-0 bg-gradient-to-br ${steps[0].color} opacity-5 pointer-events-none`} />
+        </div>
+      </section>
+
+      {/* ================= Stats ================= */}
+      <section className="py-16 sm:py-24 lg:py-40 bg-slate-950 text-white text-center">
+        <h2 className="text-xs uppercase tracking-[0.4em] text-blue-500 mb-8 sm:mb-12">
+          Cumulative Intelligence
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 lg:gap-16 px-4 sm:px-6 lg:px-12">
+          {[
+            ["2M+", "Lines Scaled"],
+            ["99.9%", "Cloud Uptime"],
+            ["500+", "AI Deployments"],
+            ["4x", "Client ROI"],
+          ].map(([val, label]) => (
+            <div key={label}>
+              <p className="text-2xl sm:text-4xl lg:text-6xl font-black">{val}</p>
+              <p className="text-[9px] sm:text-xs uppercase tracking-widest text-slate-500 mt-1 sm:mt-2">
+                {label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
 
-export const HowItWorks: React.FC = () => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  return (
-    <section ref={sectionRef} className="relative bg-white py-32 sm:py-48 overflow-hidden">
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-32 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            className="inline-flex items-center gap-3 rounded-full bg-gray-100 px-5 py-2 text-xs font-black text-gray-900 mb-8 tracking-widest uppercase shadow-sm"
-          >
-            <Sparkles size={14} className="text-blue-500" />
-            The Foundry Process
-          </motion.div>
-
-          <h2 className="text-5xl sm:text-6xl font-black text-gray-900 leading-tight font-display">
-            Methodology <br />
-            <span className="text-gray-400 italic">Redefined</span>
-          </h2>
-          <p className="mt-6 text-lg sm:text-xl text-gray-500 font-medium leading-relaxed">
-            Our precision framework is designed to move at the speed of the industry. 
-            Direct, data-driven, and hyper-personalized.
-          </p>
-        </div>
-
-        {/* Steps */}
-        <div className="space-y-40 sm:space-y-64">
-          {steps.map((step, index) => {
-            const isEven = index % 2 === 0;
-            return (
-              <div key={step.title} className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-32 ${!isEven ? "lg:flex-row-reverse" : ""}`}>
-                {/* Content */}
-                <motion.div
-                  initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                  className="flex-1 space-y-6"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-2xl`}>
-                      <step.icon size={26} strokeWidth={2} />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-black text-gray-400 tracking-widest uppercase">Stage 0{index + 1}</span>
-                      <span className="text-sm font-bold text-gray-900">Elite Protocol</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight font-display">{step.title}</h3>
-                  <p className="text-lg sm:text-xl text-gray-500 leading-relaxed">{step.description}</p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-                    {step.highlights.map((highlight, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="flex-shrink-0 h-7 w-7 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center shadow-sm">
-                          <CheckCircle2 size={16} className="text-gray-900" strokeWidth={2.5} />
-                        </div>
-                        <span className="text-xs font-black text-gray-600">{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* AI Illustration */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1 }}
-                  className="flex-1 w-full max-w-xl"
-                >
-                  <AIIllustration prompt={step.title} colorClass={step.accentColor} />
-                </motion.div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-};
+export default Works;

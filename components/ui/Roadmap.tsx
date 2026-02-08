@@ -199,9 +199,9 @@ const FlipCard = ({ path, index }: { path: typeof paths[0]; index: number }) => 
             WebkitBackfaceVisibility: "hidden",
           }}
         >
-          <div className="relative h-full rounded-2xl sm:rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-slate-300">
+          <div className="relative h-full rounded-2xl sm:rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-slate-300 dark:bg-slate-900 dark:border-slate-800 dark:group-hover:border-slate-700">
             {/* Subtle gradient overlay matching Hero */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-white to-slate-50/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-white to-slate-50/30 pointer-events-none dark:from-slate-900/50 dark:via-slate-900/30 dark:to-slate-950/40" />
             
             {/* Animated gradient orb - subtle like Hero */}
             <div className={`absolute -top-24 -right-24 h-40 w-40 sm:h-48 sm:w-48 rounded-full bg-gradient-to-r ${path.color} opacity-[0.07] blur-3xl group-hover:opacity-[0.12] group-hover:scale-125 transition-all duration-700`} />
@@ -217,12 +217,12 @@ const FlipCard = ({ path, index }: { path: typeof paths[0]; index: number }) => 
               </motion.div>
 
               {/* Title - Clean Hero style */}
-              <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight dark:text-white">
                 {path.title}
               </h3>
 
               {/* Description - Hero typography */}
-              <p className="mt-3 sm:mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="mt-3 sm:mt-4 text-slate-600 text-sm sm:text-base leading-relaxed dark:text-slate-300">
                 {path.description}
               </p>
 
@@ -234,27 +234,27 @@ const FlipCard = ({ path, index }: { path: typeof paths[0]; index: number }) => 
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
-                    className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-700 font-medium group/item"
+                    className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-700 font-medium group/item dark:text-slate-200"
                   >
                     <motion.span 
                       className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${path.color} shadow-sm flex-shrink-0 group-hover/item:scale-125 transition-transform`}
                     />
-                    <span className="group-hover/item:text-slate-900 transition-colors">{step}</span>
+                    <span className="group-hover/item:text-slate-900 transition-colors dark:group-hover/item:text-white">{step}</span>
                   </motion.li>
                 ))}
               </ul>
 
               {/* Click Indicator - matching Hero's subtle style */}
-              <div className="mt-auto pt-5 sm:pt-6 border-t border-slate-100">
+              <div className="mt-auto pt-5 sm:pt-6 border-t border-slate-100 dark:border-slate-800">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-400 group-hover:text-slate-600 transition-colors">
+                  <span className="text-xs font-medium text-slate-400 group-hover:text-slate-600 transition-colors dark:text-slate-500 dark:group-hover:text-slate-300">
                     Click to explore
                   </span>
                   <motion.div
                     animate={{ x: [0, 4, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <ArrowRight className="text-slate-400 group-hover:text-slate-600 transition-colors" size={14} />
+                    <ArrowRight className="text-slate-400 group-hover:text-slate-600 transition-colors dark:text-slate-500 dark:group-hover:text-slate-300" size={14} />
                   </motion.div>
                 </div>
               </div>
@@ -353,7 +353,7 @@ const FlipCard = ({ path, index }: { path: typeof paths[0]; index: number }) => 
                 initial={{ opacity: 0, y: 20 }}
                 animate={isFlipped ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.9 }}
-                href="#contact"
+                href="/contact"
                 className="group/btn mt-5 sm:mt-6 inline-flex items-center justify-center gap-2 sm:gap-3 rounded-xl bg-white px-5 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-bold text-slate-900 shadow-2xl hover:shadow-white/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -387,12 +387,12 @@ export default function Roadmap() {
     <section
       id="roadmap"
       ref={sectionRef}
-      className="relative bg-white py-16 sm:py-24 md:py-32 overflow-hidden"
+      className="relative bg-white py-16 sm:py-24 md:py-32 overflow-hidden dark:bg-slate-950"
     >
       {/* Subtle background gradients matching Hero */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 h-64 w-64 sm:h-96 sm:w-96 md:h-[500px] md:w-[500px] rounded-full bg-purple-500/[0.03] blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 h-64 w-64 sm:h-96 sm:w-96 md:h-[500px] md:w-[500px] rounded-full bg-blue-500/[0.03] blur-3xl" />
+        <div className="absolute top-0 left-1/4 h-64 w-64 sm:h-96 sm:w-96 md:h-[500px] md:w-[500px] rounded-full bg-purple-500/[0.03] blur-3xl dark:bg-purple-500/[0.08]" />
+        <div className="absolute bottom-0 right-1/4 h-64 w-64 sm:h-96 sm:w-96 md:h-[500px] md:w-[500px] rounded-full bg-blue-500/[0.03] blur-3xl dark:bg-blue-500/[0.08]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -407,18 +407,18 @@ export default function Roadmap() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 mb-4 sm:mb-6"
+            className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 mb-4 sm:mb-6 dark:bg-slate-900/70 dark:text-slate-200"
           >
-            <Sparkles size={14} className="sm:w-4 sm:h-4 text-slate-600" />
+            <Sparkles size={14} className="sm:w-4 sm:h-4 text-slate-600 dark:text-slate-300" />
             Clear Learning Paths
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight dark:text-white">
             Simple Tech Roadmaps
           </h2>
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed">
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed dark:text-slate-300">
             No hype. No confusion. Just clear learning paths based on where
-            you are today. <span className="font-semibold text-slate-700">Click any card to explore.</span>
+            you are today. <span className="font-semibold text-slate-700 dark:text-slate-200">Click any card to explore.</span>
           </p>
         </motion.div>
 
@@ -437,12 +437,12 @@ export default function Roadmap() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 sm:mt-20 md:mt-24 text-center max-w-2xl mx-auto"
         >
-          <p className="text-slate-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed px-4">
+          <p className="text-slate-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed px-4 dark:text-slate-300">
             Not sure which path to choose? Let's talk about your goals and create a personalized learning journey.
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 sm:gap-3 rounded-xl bg-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-lg hover:shadow-xl hover:bg-slate-800 active:scale-[0.98] transition-all duration-300"
+            className="group inline-flex items-center gap-2 sm:gap-3 rounded-xl bg-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-lg hover:shadow-xl hover:bg-slate-800 active:scale-[0.98] transition-all duration-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
           >
             Get Personalized Guidance
             <ArrowRight size={18} className="sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

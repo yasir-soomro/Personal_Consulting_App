@@ -35,8 +35,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Reliability", value: "99.999%" },
     ],
     color: "from-blue-500 to-indigo-600",
-    image:
-      "https://images.unsplash.com/photo-1611974714024-4607755365bc?auto=format&fit=crop&q=80&w=1200",
+    image: "/images/cons.png",
     overview:
       "A global trading organization needed to reduce order latency while improving reliability across regions.",
     challenge:
@@ -64,8 +63,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Compliance", value: "HIPAA/SOC2" },
     ],
     color: "from-violet-500 to-purple-600",
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200",
+    image: "/images/aa.jpg",
     overview:
       "A digital health provider wanted a scalable triage assistant to reduce patient wait times.",
     challenge:
@@ -93,8 +91,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Fuel Eff.", value: "+12%" },
     ],
     color: "from-emerald-500 to-teal-600",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
+    image: "/images/lina.jpg",
     overview:
       "A logistics provider needed real-time routing intelligence without ballooning cloud spend.",
     challenge:

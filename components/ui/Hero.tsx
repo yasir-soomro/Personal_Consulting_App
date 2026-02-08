@@ -81,8 +81,8 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen pt-35 flex items-center bg-white overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100" />
+    <section className="relative min-h-screen pt-35 flex items-center bg-white overflow-hidden dark:bg-slate-950">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900/60" />
 
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -96,7 +96,7 @@ export default function Hero() {
           >
             <motion.span
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/80 backdrop-blur text-sm shadow"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200/70 bg-white/80 backdrop-blur text-sm shadow dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-slate-100"
             >
               <Sparkles size={16} className="text-purple-500" />
               Free Tech Career Guidance
@@ -104,10 +104,10 @@ export default function Hero() {
 
             <motion.h1
               variants={itemVariants}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-slate-900 dark:text-white"
             >
               Stuck in Your Tech Path?  
-              <span className="block mt-3 text-slate-700">
+              <span className="block mt-3 text-slate-700 dark:text-slate-200">
                 We Guide You in{" "}
                 <span
                   className={`bg-clip-text text-transparent bg-gradient-to-r ${words[index].color}`}
@@ -120,7 +120,7 @@ export default function Hero() {
 
             <motion.p
               variants={itemVariants}
-              className="text-slate-600 max-w-xl"
+              className="text-slate-600 max-w-xl dark:text-slate-300"
             >
               Free consulting for developers & students confused about learning
               paths, careers, Agentic AI, Full-Stack & Cloud-Native systems.
@@ -129,13 +129,13 @@ export default function Hero() {
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 items-center">
               <Link
                 href="/contact"
-                className="px-6 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition"
+                className="px-6 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
               >
                 Get Free Guidance →
               </Link>
               <Link
                 href="/roadmap"
-                className="font-semibold text-slate-600 hover:text-slate-900 transition"
+                className="font-semibold text-slate-600 hover:text-slate-900 transition dark:text-slate-300 dark:hover:text-white"
               >
                 See Learning Roadmap →
               </Link>
@@ -160,12 +160,12 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: [0.42, 0, 0.58, 1], // easeInOut typed
               }}
-              className="bg-white rounded-3xl p-8 shadow-xl border"
+              className="bg-white rounded-3xl p-8 shadow-xl border border-slate-200/70 dark:bg-slate-900 dark:border-slate-800"
             >
-              <h3 className="text-xl font-bold mb-6">Who This Is For</h3>
+              <h3 className="text-xl font-bold mb-6 text-slate-900 dark:text-white">Who This Is For</h3>
               <ul className="space-y-4">
                 {features.map((f, i) => (
-                  <li key={i} className="flex gap-3 text-slate-600">
+                  <li key={i} className="flex gap-3 text-slate-600 dark:text-slate-300">
                     <CheckCircle2 className="text-emerald-500" />
                     {f}
                   </li>
